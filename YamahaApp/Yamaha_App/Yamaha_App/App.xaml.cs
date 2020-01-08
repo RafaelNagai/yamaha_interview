@@ -4,17 +4,25 @@ using Yamaha_App.ViewModels;
 using Yamaha_App.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Yamaha_App.Database;
+using Yamaha_App.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Yamaha_App
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
+        public static DatabaseSQLite<ProductModel> databaseProduct;
+        public static DatabaseSQLite<ProductModel> DatabaseProduct
+        {
+            get
+            {
+                if (databaseProduct == null)
+                    databaseProduct = new DatabaseSQLite<ProductModel>();
+                return databaseProduct;
+            }
+        }
+
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -23,13 +31,13 @@ namespace Yamaha_App
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/ProductPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<ProductPage, ProductPageViewModel>();
         }
     }
 }

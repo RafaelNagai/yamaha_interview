@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Yamaha_App.Views.ProductPage"
+             Title="{Binding Title}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Row="0"
+                     Grid.Column="0"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="Start"
+                     Orientation="Horizontal"
+                     Padding="10, 5">
+            <Entry HorizontalOptions="FillAndExpand"
+                   Placeholder="Name"></Entry>
+            <Button Text="ADD"
+                    HorizontalOptions="End"
+                    BorderWidth="10"></Button>
+        </StackLayout>
+        <ListView Grid.Row="1"
+                  Grid.Column="0"
+                  ItemsSource="{Binding Product}"
+                  HasUnevenRows="True"
+                  SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     Orientation="Horizontal">
+                            <Label Text="{Binding Name}"
+                                   HorizontalOptions="StartAndExpand"
+                                   VerticalOptions="CenterAndExpand"
+                                   Padding="5"></Label>
+                            <Button Text="DELETE"
+                                    BackgroundColor="RosyBrown"
+                                    VerticalOptions="CenterAndExpand"
+                                    HeightRequest="30"
+                                    HorizontalOptions="End"
+                                    Padding="0"></Button>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
