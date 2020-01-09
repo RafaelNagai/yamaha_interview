@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Yamaha_App.Views.ProductPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             x:Name="ProductPageId">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -21,10 +22,12 @@
                      Orientation="Horizontal"
                      Padding="10, 5">
             <Entry HorizontalOptions="FillAndExpand"
-                   Placeholder="Name"></Entry>
+                   Placeholder="Name"
+                   Text="{Binding Name}"></Entry>
             <Button Text="ADD"
                     HorizontalOptions="End"
-                    BorderWidth="10"></Button>
+                    BorderWidth="10"
+                    Command="{Binding AddProduct}"></Button>
         </StackLayout>
         <ListView Grid.Row="1"
                   Grid.Column="0"
@@ -45,7 +48,9 @@
                                     VerticalOptions="CenterAndExpand"
                                     HeightRequest="30"
                                     HorizontalOptions="End"
-                                    Padding="0"></Button>
+                                    Padding="0"
+                                    Command="{Binding BindingContext.RemoveProduct, Source={x:Reference ProductPageId} }"
+                                    CommandParameter="{Binding .}"></Button>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

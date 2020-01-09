@@ -45,7 +45,7 @@ namespace Yamaha_App.Database
             return await Database.Table<TModel>().ToListAsync();
         }
 
-        public Task Insert(TModel model)
+        public Task<int> Insert(TModel model)
         {
             return Database.InsertAsync(model);
         }

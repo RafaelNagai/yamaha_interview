@@ -9,7 +9,7 @@ namespace Yamaha_App.Models.Interfaces
 
         Task<IList<TModel>> GetAll();
 
-        Task Insert(TModel model);
+        Task<int> Insert(TModel model);
 
         Task Delete(TModel model);
     }

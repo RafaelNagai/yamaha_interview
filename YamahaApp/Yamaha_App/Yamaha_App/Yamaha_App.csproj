@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Yamaha_App.Database\Yamaha_App.Database.csproj" />
     <ProjectReference Include="..\..\Yamaha_App.Models\Yamaha_App.Models.csproj" />
   </ItemGroup>
