@@ -8,20 +8,33 @@ using Yamaha_App.Database;
 using Yamaha_App.Models;
 using Yamaha_App.Services.Interfaces;
 using Yamaha_App.Services;
+using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Yamaha_App
 {
     public partial class App
     {
-        public static DatabaseSQLite<ProductModel> databaseProduct;
+        private static DatabaseSQLite<ProductModel> _databaseProduct;
+        private static DatabaseSQLite<SyncronizeDataModel> _databaseSyncronizeData;
+
         public static DatabaseSQLite<ProductModel> DatabaseProduct
         {
             get
             {
-                if (databaseProduct == null)
-                    databaseProduct = new DatabaseSQLite<ProductModel>();
-                return databaseProduct;
+                if (_databaseProduct == null)
+                    _databaseProduct = new DatabaseSQLite<ProductModel>();
+                return _databaseProduct;
+            }
+        }
+
+        public static DatabaseSQLite<SyncronizeDataModel> DatabaseSyncronizeData
+        {
+            get
+            {
+                if (_databaseSyncronizeData == null)
+                    _databaseSyncronizeData = new DatabaseSQLite<SyncronizeDataModel>();
+                return _databaseSyncronizeData;
             }
         }
 

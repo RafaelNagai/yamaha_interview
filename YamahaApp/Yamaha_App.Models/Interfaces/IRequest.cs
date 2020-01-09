@@ -1,6 +1,6 @@
 ﻿namespace Yamaha_App.Models.Interfaces
 {
-    public interface IModelBase
+    public interface IRequest
     {
     }
 }

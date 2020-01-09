@@ -8,7 +8,7 @@ using Yamaha_App.Models.Interfaces;
 
 namespace Yamaha_App.Database
 {
-    public class DatabaseSQLite<TModel> : IDataBase<TModel> where TModel : IModelBase, new ()
+    public class DatabaseSQLite<TModel> : IDataBase<TModel> where TModel : IBaseModel, new ()
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {

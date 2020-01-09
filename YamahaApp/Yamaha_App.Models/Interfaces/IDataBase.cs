@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Yamaha_App.Models.Interfaces
 {
-    public interface IDataBase<TModel> : IModelBase
+    public interface IDataBase<TModel> : IBaseModel
     {
         Task Initialize();
 
