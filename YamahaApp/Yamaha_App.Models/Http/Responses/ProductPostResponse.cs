@@ -2,7 +2,7 @@
 
 namespace Yamaha_App.Models.Http.Responses
 {
-    public class SyncDataResponse : IResponse
+    public class ProductPostResponse : IResponse
     {
         public string Version { get; set; }
     }

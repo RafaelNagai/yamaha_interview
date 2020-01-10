@@ -1,18 +1,18 @@
-﻿using System.Linq;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 using Yamaha_App.Models;
 using Yamaha_App.Services.Interfaces;
-using Xamarin.Forms.Internals;
 
 namespace Yamaha_App.ViewModels
 {
     public class ProductPageViewModel : ViewModelBase
     {
-        private IProductService _productService;
+        private readonly IProductService _productService;
+        private readonly ISyncService _syncService;
 
         public ObservableCollection<ProductModel> Product { get; set; } = new ObservableCollection<ProductModel>();
 
@@ -29,12 +29,14 @@ namespace Yamaha_App.ViewModels
 
         public ProductPageViewModel(
             INavigationService navigationService,
-            IProductService productService
+            IProductService productService,
+            ISyncService syncService
         ) : base(navigationService)
         {
             Title = "Interview Yamaha";
 
             _productService = productService;
+            _syncService = syncService;
 
             _productService.GetAll().ContinueWith((Task<IList<ProductModel>> products) => {
                 var result = products.Result;
@@ -53,6 +55,9 @@ namespace Yamaha_App.ViewModels
                 // Adiciona na lista
                 Product.Add(product);
                 Name = string.Empty;
+                // Se houve uma alteração, ele deixa a versao da sincronização zerada, para forçar ele a sincronizar na proxima
+                await _syncService.SyncDataChanged(true);
+                await _syncService.UpdateDatabaseLocalToServer();
             });
 
             RemoveProduct = new DelegateCommand<ProductModel>(async (ProductModel product) =>
@@ -61,6 +66,9 @@ namespace Yamaha_App.ViewModels
                 await _productService.Remove(product);
                 // Remove da lista de produtos
                 Product.Remove(product);
+                // Se houve uma alteração, ele deixa a versao da sincronização zerada, para forçar ele a sincronizar na proxima
+                await _syncService.SyncDataChanged(true);
+                await _syncService.UpdateDatabaseLocalToServer();
             });
         }
     }
